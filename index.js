@@ -1,8 +1,9 @@
 const express = require("express")
 const cors = require("cors")
 const axios = require("axios")
+const bodyparser = require("body-parser")
 var app = express()
-const port = proces.env.port || 3000
+const port = process.env.port || 3000
 
 
 const corsOptions = {
@@ -11,6 +12,8 @@ const corsOptions = {
 }
 
 app.use(cors(corsOptions))
+app.use(bodyparser.json())
+app.use(bodyparser.urlencoded({ extended: true }));
 
 app.get("/callback", (req, res) => {
     // make request to github api using the code provided.
@@ -25,7 +28,6 @@ app.get("/callback", (req, res) => {
     // serve a static webpage.
 })
 
-app.use(bodyparser.json())
-app.use(bodyparser.urlencoded({ extended: true }));
+
 
 app.use(express.static('public'))
