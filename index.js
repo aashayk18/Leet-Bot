@@ -4,6 +4,8 @@ const axios = require("axios")
 const bodyparser = require("body-parser")
 var app = express()
 const port = process.env.port || 3000
+const clientId = process.env.client_id
+const clientSecret = process.env.client_secret
 
 
 const corsOptions = {
@@ -16,22 +18,24 @@ app.use(bodyparser.json())
 app.use(bodyparser.urlencoded({ extended: true }));
 
 app.get("/getaccess", (req, res) => {
-    // make request to github api using the code provided.
-    const data = {
-        // req.code, client id, client secret
-    }
-    axios.post("https://github.com/login/oauth/access_token", data).then(
+    const accessCode = req.query.code
+    axios.post("https://github.com/login/oauth/access_token", {
+        params: {
+            client_id: clientId,
+            client_secret: clientSecret,
+            code: accessCode
+        }
+    }).then(
         (res) => {
-            // call saveToken controller
+            saveToken.addToken(res.access_token);
         }
     ).catch((err) => console.error(err))
-    // serve a static webpage.
 })
 
 
 
 app.use(express.static('public'))
 
-app.listen(port,()=>{
+app.listen(port, () => {
     console.log("Server running")
 })
