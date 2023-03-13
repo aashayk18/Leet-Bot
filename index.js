@@ -15,7 +15,7 @@ app.use(cors(corsOptions))
 app.use(bodyparser.json())
 app.use(bodyparser.urlencoded({ extended: true }));
 
-app.get("/callback", (req, res) => {
+app.get("/getaccess", (req, res) => {
     // make request to github api using the code provided.
     const data = {
         // req.code, client id, client secret
@@ -31,3 +31,7 @@ app.get("/callback", (req, res) => {
 
 
 app.use(express.static('public'))
+
+app.listen(port,()=>{
+    console.log("Server running")
+})
