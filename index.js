@@ -2,10 +2,11 @@ const express = require("express")
 const cors = require("cors")
 const axios = require("axios")
 const bodyparser = require("body-parser")
+const config = require("./config")
 var app = express()
 const port = process.env.port || 3000
-const clientId = process.env.client_id
-const clientSecret = process.env.client_secret
+const clientId = process.env.client_id || config.client_id
+const clientSecret = process.env.client_secret || config.client_secret
 
 
 const corsOptions = {
@@ -19,7 +20,9 @@ app.use(bodyparser.urlencoded({ extended: true }));
 
 app.get("/getaccess", (req, res) => {
     const accessCode = req.query.code
-    axios.post("https://github.com/login/oauth/access_token", {
+    
+    console.log(clientId + " " + clientSecret + accessCode)
+    axios.post("https://github.com/login/oauth/access_token",null, {
         params: {
             client_id: clientId,
             client_secret: clientSecret,
@@ -27,9 +30,9 @@ app.get("/getaccess", (req, res) => {
         }
     }).then(
         (res) => {
-            saveToken.addToken(res.access_token);
+            console.log(res.data);
         }
-    ).catch((err) => console.error(err))
+    ).catch((err) => {})
 })
 
 
