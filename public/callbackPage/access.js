@@ -1,4 +1,4 @@
-async function getToken(){
+async function sendToken(){
     axios.post("",)
     return token
 }

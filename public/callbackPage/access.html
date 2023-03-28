@@ -1,0 +1,26 @@
+<html>
+
+<head>
+    <script src = "https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        function sendToken(){
+            const usernameVal = document.getElementById("username").value
+            const repoVal = document.getElementById("repo").value
+            //const  tokenVal;
+            axios.post("/save",{
+                
+            })
+        }
+    </script>
+    
+</head>
+
+<body>
+    <div>
+        <input type="text" placeholder="Username" id="username">
+        <input type="text" placeholder="Repo Name" id = "repo">
+        <button onclick="sendToken()"> Save Changes </button>
+    </div>
+</body>
+
+</html>

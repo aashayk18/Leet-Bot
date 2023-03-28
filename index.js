@@ -4,6 +4,8 @@ const axios = require("axios")
 const bodyparser = require("body-parser")
 const config = require("./config")
 var app = express()
+const saveToken = require("./controllers/saveToken")
+
 const port = process.env.port || 3000
 const clientId = process.env.client_id || config.client_id
 const clientSecret = process.env.client_secret || config.client_secret
@@ -36,8 +38,8 @@ app.get("/getaccess", (req, res) => {
 })
 
 
-
 app.use(express.static('public'))
+
 
 app.listen(port, () => {
     console.log("Server running")
