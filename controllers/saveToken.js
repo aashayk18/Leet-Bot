@@ -2,13 +2,10 @@ const { default: mongoose } = require("mongoose")
 const mongooose = require("mongoose")
 const Tokens = require("./tokenModel")
 const config = require("../config")
-exports.addToken = (req, res) => {
+exports.addToken = (tokenVal,user_name,repoVal) => {
     mongooose.connect(config.mongoDbUrl, { useNewUrlParser: true }, err => {
 
         if (!err) {
-            const tokenVal = req.body.token
-            const user_name = req.body.username
-            const repoVal = req.body.repo
             userToken = new Tokens({
                 username: user_name,
                 token: tokenVal,

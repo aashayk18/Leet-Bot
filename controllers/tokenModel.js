@@ -13,9 +13,9 @@ const tokenSchema = new Schema({
         unique: true
     },
     repo: {
-    type: "String",
-    required: true,
-    trim: true
+        type: "String",
+        required: true,
+        trim: true
     }
 })
 
