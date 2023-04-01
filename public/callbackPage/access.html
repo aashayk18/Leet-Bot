@@ -1,24 +1,28 @@
 <html>
 
 <head>
-    <script src = "https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
-        function sendToken(){
+        console.log(tokenVal)
+        function sendToken() {
             const usernameVal = document.getElementById("username").value
             const repoVal = document.getElementById("repo").value
-            //const  tokenVal;
-            axios.post("/save",{
-                
-            })
+            const tokenVal = document.cookie.slice(6);
+            var data = {type:"FOR_CHROME_EXTENSION" , username : usernameVal,repo : repoVal,token:tokenVal}
+            window.postMessage(data,"*")
         }
     </script>
-    
+
 </head>
 
 <body>
     <div>
-        <input type="text" placeholder="Username" id="username">
-        <input type="text" placeholder="Repo Name" id = "repo">
+        <input type="text"
+               placeholder="Username"
+               id="username">
+        <input type="text"
+               placeholder="Repo Name"
+               id="repo">
         <button onclick="sendToken()"> Save Changes </button>
     </div>
 </body>

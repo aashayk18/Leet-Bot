@@ -3,6 +3,7 @@ const cors = require("cors")
 const axios = require("axios")
 const bodyparser = require("body-parser")
 const config = require("./config")
+const path = require("path")
 const saveToken = require("./controllers/saveToken")
 var app = express()
 
@@ -23,6 +24,12 @@ app.use(cors(corsOptions))
 app.use(bodyparser.json())
 app.use(bodyparser.urlencoded({ extended: true }));
 
+app.use(express.static('public'))
+
+app.get("/installapp",((req,res)=>{
+    res.sendFile(path.join(__dirname,"/public","install.html"))
+}))
+
 // Github Redirect leads here
 app.get("/getaccess", (req, res) => {
     const accessCode = req.query.code
@@ -39,7 +46,7 @@ app.get("/getaccess", (req, res) => {
             const firstIndex = 13
             let endIndex = accessToken.data.search("&")
             const token = accessToken.data.substring(firstIndex, endIndex)
-            const octokit = new Octokit({
+            /*const octokit = new Octokit({
                 auth: token,
             });
             octokit.request('GET /user', {
@@ -56,13 +63,14 @@ app.get("/getaccess", (req, res) => {
                 }
             }).then((username) => {
                 console.log(username.data.login)
-            })
+            })*/
+            res.cookie("token",token)
+            res.sendFile(path.join(__dirname,"/public/callbackPage","access.html"))
         }
     ).catch((err) => { })
 })
 
 
-app.use(express.static('public'))
 
 
 app.listen(port, () => {
