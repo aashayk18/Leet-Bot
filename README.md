@@ -6,4 +6,7 @@ LeetBot replaces the repetitive motions of copying and pasting solutions from Le
 
 Built for and by students, LeetBot is a handy tool for learners wanting to keep track of their coding progress and journey. We aim to provide students the ability to automate their work, while also giving them the freedom to customize their details.
 
-Curated with passion by [@ranjan210](https://github.com/ranjan210) and [@aashayk18](https://github.com/aashayk18)
+
+
+
+*Curated with passion by [@ranjan210](https://github.com/ranjan210) and [@aashayk18](https://github.com/aashayk18)*
